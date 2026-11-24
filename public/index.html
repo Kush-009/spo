@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>Spotify Tablet Stream Deck</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='50' fill='%231db954'/><path d='M25 40c18-5 35-3 50 4M28 53c15-4 29-2 42 3M31 66c12-3 23-2 34 3' stroke='%23fff' stroke-width='7' stroke-linecap='round' fill='none'/></svg>">
+</head>
+<body>
+  <div class="deck-container">
+    <!-- Stream Deck Top Header Bar -->
+    <header class="deck-header">
+      <div class="deck-tabs">
+        <button class="deck-tab-btn active">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="var(--spotify-green)"><circle cx="12" cy="12" r="10"/><path d="M8 11.5c4-1.2 8-.7 11.5.8M8.5 14.5c3.2-1 6.5-.6 9.2.6M9 17.5c2.5-.8 5-.5 7.2.5" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/></svg>
+          Spotify Deck
+        </button>
+        <button class="deck-tab-btn" onclick="alert('Quick PC Actions deck can be added next!')">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+          PC Deck
+        </button>
+      </div>
+
+      <div class="header-status-group">
+        <div class="status-pill" id="statusPill" title="Local Network Connection">
+          <span class="status-dot" id="connectionStatusDot"></span>
+          <span id="connectionStatusText">Demo Mode</span>
+        </div>
+
+        <!-- Keep Awake Toggle for Tablet -->
+        <button class="header-icon-btn" id="wakeLockToggleBtn" title="Keep Tablet Awake (Screen Wake Lock)">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        </button>
+
+        <!-- Dark/Light Theme Toggle -->
+        <button class="header-icon-btn" id="themeToggleBtn" title="Toggle Light / Dark Mode">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+        </button>
+
+        <!-- Fullscreen Button -->
+        <button class="header-icon-btn" id="fullscreenToggleBtn" title="Toggle Tablet Fullscreen">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg>
+        </button>
+      </div>
+    </header>
+
+    <!-- Main Body Container -->
+    <main class="dashboard-body">
+      <!-- Left Sidebar -->
+      <aside class="deck-sidebar">
+        <div>
+          <div class="sidebar-brand">
+            <svg class="spotify-logo-icon" viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="11" fill="var(--spotify-green)"/>
+              <path d="M7 10.5c3.5-1 7.2-.6 10.5.8M7.5 13.5c2.8-.8 5.8-.5 8.2.6M8 16.5c2.2-.6 4.4-.4 6.4.4" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/>
+            </svg>
+            <span class="brand-title">Spotify</span>
+          </div>
+
+          <nav class="sidebar-nav">
+            <button class="nav-item active" id="navHome">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+              Home
+            </button>
+            <button class="nav-item" id="navSearch">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+              Search
+            </button>
+            <button class="nav-item" id="navLibrary">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+              Your Library
+            </button>
+            
+            <div class="sidebar-divider"></div>
+
+            <button class="nav-item" id="navLiked">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+              Liked Songs
+            </button>
+            <button class="nav-item" id="navCreatePlaylist" onclick="alert('New playlist creation: Select tracks from search to add to your library!')">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+              Create Playlist
+            </button>
+            <button class="nav-item" id="navRecent" onclick="alert('Showing Recently Played tracks on your PC!')">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 14 14"/></svg>
+              Recently Played
+            </button>
+          </nav>
+        </div>
+
+        <div class="sidebar-bottom">
+          <button class="nav-item" id="openSettingsBtn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+            Settings
+          </button>
+        </div>
+      </aside>
+
+      <!-- 2x2 Modular Grid Matching Reference Mockup -->
+      <section class="dashboard-grid">
+        
+        <!-- CARD 1: NOW PLAYING -->
+        <div class="card now-playing-card">
+          <div class="album-art-wrapper">
+            <img id="albumArt" class="album-art-img" src="assets/cover-placeholder.svg" alt="Album Cover" onerror="this.src='assets/cover-placeholder.svg'" />
+          </div>
+
+          <div class="now-playing-info">
+            <h1 class="track-title" id="trackTitle">Night Changes</h1>
+            <h2 class="track-artist" id="trackArtist">One Direction</h2>
+
+            <!-- Scrubber / Progress -->
+            <div class="progress-container">
+              <div class="progress-bar-bg" id="progressBarBg">
+                <div class="progress-bar-fill" id="progressFill" style="width: 37%;"></div>
+                <div class="progress-thumb" id="progressThumb" style="left: 37%;"></div>
+              </div>
+              <div class="time-labels">
+                <span id="timeElapsed">1:24</span>
+                <span id="timeTotal">3:46</span>
+              </div>
+            </div>
+
+            <!-- Playback Controls -->
+            <div class="playback-controls">
+              <!-- Shuffle -->
+              <button class="ctrl-btn" id="shuffleBtn" title="Shuffle">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/><polyline points="21 16 21 21 16 21"/><line x1="15" y1="15" x2="21" y2="21"/><line x1="4" y1="4" x2="9" y2="9"/></svg>
+              </button>
+
+              <!-- Previous -->
+              <button class="ctrl-btn" id="prevBtn" title="Previous Track">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><polygon points="19 20 9 12 19 4 19 20"></polygon><line x1="5" y1="19" x2="5" y2="5" stroke="currentColor" stroke-width="2.5"></line></svg>
+              </button>
+
+              <!-- Big Play / Pause (Spotify Green) -->
+              <button class="ctrl-btn play-pause-btn" id="playPauseBtn" title="Play / Pause">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16" rx="1.5"></rect><rect x="14" y="4" width="4" height="16" rx="1.5"></rect></svg>
+              </button>
+
+              <!-- Next -->
+              <button class="ctrl-btn" id="nextBtn" title="Next Track">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 4 15 12 5 20 5 4"></polygon><line x1="19" y1="5" x2="19" y2="19" stroke="currentColor" stroke-width="2.5"></line></svg>
+              </button>
+
+              <!-- Repeat -->
+              <button class="ctrl-btn" id="repeatBtn" title="Repeat Track / Context">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- CARD 2: PLAYLISTS & SEARCH -->
+        <div class="card playlists-card">
+          <!-- Search Bar -->
+          <div class="search-bar-wrapper">
+            <svg class="search-icon-inside" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <input type="text" class="search-input" id="searchInput" placeholder="Search songs, artists, or playlists..." autocomplete="off" />
+            <button class="search-clear-btn" id="searchClearBtn">&times;</button>
+          </div>
+
+          <!-- Category Filter Pills -->
+          <div class="filter-pills">
+            <button class="pill-btn active" data-tab="playlists">Playlists</button>
+            <button class="pill-btn" data-tab="songs">Songs</button>
+            <button class="pill-btn" data-tab="artists">Artists</button>
+            <button class="pill-btn" data-tab="albums">Albums</button>
+          </div>
+
+          <!-- List Container -->
+          <div class="playlists-list" id="playlistsList">
+            <!-- Rendered by JS -->
+          </div>
+        </div>
+
+        <!-- CARD 3: VOLUME & QUICK ACTIONS -->
+        <div class="card volume-card">
+          <div>
+            <div class="card-title-row">
+              <div class="card-title-left">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+                <span>Volume</span>
+              </div>
+              <span class="badge-percent" id="volumePercentLabel">70%</span>
+            </div>
+
+            <!-- Volume Slider -->
+            <div class="volume-slider-row">
+              <svg class="vol-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/></svg>
+              <div class="volume-slider-container" id="volumeSliderContainer">
+                <div class="volume-slider-fill" id="volumeSliderFill" style="width: 70%;"></div>
+                <div class="volume-slider-thumb" id="volumeSliderThumb" style="left: 70%;"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Quick Action Buttons -->
+          <div class="quick-actions-row">
+            <!-- Shuffle with switch -->
+            <div class="quick-action-box" id="qaShuffleBox">
+              <svg class="qa-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/><polyline points="21 16 21 21 16 21"/><line x1="15" y1="15" x2="21" y2="21"/><line x1="4" y1="4" x2="9" y2="9"/></svg>
+              <span class="qa-label">Shuffle</span>
+              <label class="switch-container">
+                <input type="checkbox" class="switch-checkbox" id="shuffleSwitch" />
+                <span class="switch-slider"></span>
+              </label>
+            </div>
+
+            <!-- Add to Playlist -->
+            <div class="quick-action-box" id="addToPlaylistBtn">
+              <svg class="qa-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+              <span class="qa-label">Add to Playlist</span>
+              <span style="font-size:11px;color:var(--text-muted);font-weight:600;">Liked</span>
+            </div>
+
+            <!-- Queue -->
+            <div class="quick-action-box" id="openQueueBtn">
+              <svg class="qa-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+              <span class="qa-label">Queue</span>
+              <span style="font-size:11px;color:var(--text-muted);font-weight:600;">View Up Next</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- CARD 4: LYRICS -->
+        <div class="card lyrics-card">
+          <div class="lyrics-header">
+            <div class="lyrics-title-left">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+              <span>Lyrics</span>
+            </div>
+            <button class="lyrics-expand-btn" id="lyricsExpandBtn" title="Expand Fullscreen Lyrics">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg>
+            </button>
+          </div>
+
+          <div class="lyrics-body" id="lyricsContainer">
+            <!-- Lyrics rendered dynamically with sync -->
+            <div class="lyric-line active">Turn around, every now and then</div>
+            <div class="lyric-line">I get a little bit lonely</div>
+            <div class="lyric-line">And you're never coming round</div>
+            <div class="lyric-line">Turn around, every now and then</div>
+          </div>
+        </div>
+
+      </section>
+    </main>
+  </div>
+
+  <!-- Fullscreen Lyrics Modal -->
+  <div class="fullscreen-lyrics-modal" id="fsLyricsModal">
+    <div class="fs-lyrics-header">
+      <div style="display:flex;align-items:center;gap:12px;">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+        <span style="font-size:22px;font-weight:800;">Synced Lyrics</span>
+      </div>
+      <button class="header-icon-btn" id="closeFsLyricsBtn" title="Close Fullscreen Lyrics">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </button>
+    </div>
+    <div class="fs-lyrics-body" id="fsLyricsContainer">
+      <!-- Synced Lines for Big Tablet Display -->
+    </div>
+  </div>
+
+  <!-- Queue Drawer / Modal -->
+  <div class="modal-overlay" id="queueModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title">Up Next in Queue</h2>
+        <button class="modal-close-btn" id="closeQueueBtn">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
+      </div>
+      <div class="playlists-list" id="queueList" style="max-height: 50vh;">
+        <!-- Queue items -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Settings & Spotify Setup Modal -->
+  <div class="modal-overlay" id="settingsModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title">Stream Deck Settings</h2>
+        <button class="modal-close-btn" id="closeSettingsBtn">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div style="background:var(--input-bg);padding:14px;border-radius:14px;font-size:13px;line-height:1.5;">
+          <strong>📱 Tablet URL:</strong> Open this in your tablet's browser:<br>
+          <code style="background:var(--card-bg);padding:4px 8px;border-radius:6px;font-weight:700;display:inline-block;margin-top:4px;" id="tabletUrlDisplay">http://192.168.31.197:5000</code>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Spotify Client ID</label>
+          <input type="text" class="form-input" id="clientIdInput" placeholder="Enter Spotify Client ID" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Spotify Client Secret</label>
+          <input type="password" class="form-input" id="clientSecretInput" placeholder="Enter Spotify Client Secret" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Redirect URI (add this in Spotify Dashboard)</label>
+          <input type="text" class="form-input" id="redirectUriInput" readonly />
+        </div>
+
+        <div style="display:flex;gap:10px;margin-top:10px;">
+          <button class="btn-primary" id="saveSettingsBtn" style="flex:1;">Save Settings</button>
+          <button class="btn-primary" id="connectSpotifyBtn" style="background:#1db954;flex:1.2;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10"/><path d="M8 11.5c4-1.2 8-.7 11.5.8M8.5 14.5c3.2-1 6.5-.6 9.2.6M9 17.5c2.5-.8 5-.5 7.2.5" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/></svg>
+            Connect Spotify
+          </button>
+        </div>
+
+        <div style="display:flex;justify-content:center;margin-top:4px;">
+          <button class="btn-secondary" id="toggleDemoModeBtn" style="width:100%;">
+            Toggle Simulation / Demo Mode
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/lyrics.js"></script>
+  <script src="js/spotify.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
