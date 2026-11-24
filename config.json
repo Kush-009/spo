@@ -1,0 +1,9 @@
+{
+  "client_id": "47224c4d02af4c889212b532aa22c3d9",
+  "client_secret": "1a5cda3672a6449b98a08748cd0b9cb7",
+  "redirect_uri": "http://127.0.0.1:5000/callback",
+  "access_token": "BQBEwV9i9ZX9VQS8Pw1WNaZaQGEdaM9qwu1gM54djC5on2SKjYwowCp0uutfGKO3zJofTo7Urj_H9gwmJ9KjCm3q9ebxOpnqNFr1xeh_BrTeYzaSkBprXYr4AgL52nWRdJUKEcVo4NJxB_d0n9o3TD7VPFg_r67TcQy8XV7mqktX85cm9bm0z0hX34_RmahMOFhM9pjRLrHoZlYutLxNtLevuAC_kTebZoieBt8Pvz9EAVjZiS_kGwZe0KMV-GiAgOeKrTWLOJEkLFn_OZf_OkOI8kdWuha9CtXq7zEkE901oSA_4Ate1Zw",
+  "refresh_token": "AQA0rFAEr4tZRd6A6gOX09PhlAlHShblNPJO1HR8GHop7PCiUov5SFqWEN3_oBFNYW-hlOHIJIYN2u_1HOmaJZM-s2SL5PDTAn3vXjIiiA49DTd1yaoJYBRaICVEXZ_3ZVY",
+  "expires_at": 1795262881.4253855,
+  "demo_mode": false
+}
